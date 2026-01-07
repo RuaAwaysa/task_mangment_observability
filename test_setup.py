@@ -18,10 +18,7 @@ def check_env_var(var_name: str, description: str, required: bool = True) -> boo
         if required:
             print(f" {var_name}: Missing (REQUIRED - {description})")
             return False
-        # else:
-        #     print(f"  {var_name}: Not set (Optional - {description})")
-        #     return True
-
+        
 def check_package(package_name: str) -> bool:
     """Check if a Python package is installed"""
     try:
