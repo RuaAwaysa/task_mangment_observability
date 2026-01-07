@@ -13,7 +13,7 @@ load_dotenv()
 def print_banner():
     """Print welcome banner"""
     print("=" * 60)
-    print("🤖 AI Task Management Agent System")
+    print(" AI Task Management Agent System")
     print("=" * 60)
     print("Integrated with:")
     print("  • CrewAI Framework")
@@ -43,7 +43,7 @@ def run_interactive_mode(agent_type: str):
     try:
         manager = TaskManager(agent_type=agent_type)
     except Exception as e:
-        print(f"❌ Error initializing agent: {e}")
+        print(f"Error initializing agent: {e}")
         print("Please check your .env file and API keys.")
         return
     
@@ -72,7 +72,7 @@ def run_interactive_mode(agent_type: str):
             print("\n\nExiting...")
             break
         except Exception as e:
-            print(f"\n❌ Error: {e}\n")
+            print(f"\nError: {e}\n")
 
 def run_demo_script():
     """Run a demo script showing both agents"""
@@ -100,7 +100,7 @@ def run_demo_script():
             response = google_manager.process(request)
             print(f"Response: {response}\n")
     except Exception as e:
-        print(f"❌ Error with Google ADK agent: {e}\n")
+        print(f" Error with Google ADK agent: {e}\n")
     
     # Test CrewAI Agent
     print("\n" + "="*60)
@@ -115,7 +115,7 @@ def run_demo_script():
             response = crewai_manager.process(request)
             print(f"Response: {response}\n")
     except Exception as e:
-        print(f"❌ Error with CrewAI agent: {e}\n")
+        print(f" Error with CrewAI agent: {e}\n")
     
     print("\n" + "="*60)
     print("Demo completed! Check Langfuse dashboard for traces and metrics.")
@@ -145,14 +145,14 @@ def check_environment():
             warnings.append(f"{var} ({description})")
     
     if missing:
-        print("❌ Missing required environment variables:")
+        print("Missing required environment variables:")
         for var in missing:
-            print(f"   • {var}")
+            print(f"  {var}")
         print("\nPlease add these to your .env file.")
         return False
     
     if warnings:
-        print("⚠️  Optional environment variables not set (may limit functionality):")
+        print("Optional environment variables not set (may limit functionality):")
         for var in warnings:
             print(f"   • {var}")
         print()
@@ -171,9 +171,9 @@ def main():
     try:
         langfuse = get_langfuse_client()
         log_agent_event("application_started", "main", {"status": "success"})
-        print("✅ Observability (Langfuse) initialized\n")
+        print("Observability (Langfuse) initialized\n")
     except Exception as e:
-        print(f"⚠️  Warning: Could not initialize Langfuse: {e}\n")
+        print(f" Warning: Could not initialize Langfuse: {e}\n")
         print("Continuing without observability...\n")
     
     # Main loop
@@ -189,18 +189,18 @@ def main():
             elif choice == '3':
                 run_demo_script()
             elif choice == '4':
-                print("\n👋 Goodbye!")
+                print("\n Goodbye!")
                 log_agent_event("application_exited", "main", {"status": "normal"})
                 break
             else:
-                print("❌ Invalid choice. Please select 1-4.\n")
+                print("Invalid choice. Please select 1-4.\n")
         
         except KeyboardInterrupt:
-            print("\n\n👋 Goodbye!")
+            print("\n\n Goodbye!")
             log_agent_event("application_exited", "main", {"status": "interrupted"})
             break
         except Exception as e:
-            print(f"\n❌ Error: {e}\n")
+            print(f"\nError: {e}\n")
 
 if __name__ == "__main__":
     main()

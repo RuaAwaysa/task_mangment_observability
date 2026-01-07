@@ -12,24 +12,24 @@ def check_env_var(var_name: str, description: str, required: bool = True) -> boo
     """Check if an environment variable is set"""
     value = os.getenv(var_name)
     if value:
-        print(f"✅ {var_name}: Set ({description})")
+        print(f" {var_name}: Set ({description})")
         return True
     else:
         if required:
-            print(f"❌ {var_name}: Missing (REQUIRED - {description})")
+            print(f" {var_name}: Missing (REQUIRED - {description})")
             return False
-        else:
-            print(f"⚠️  {var_name}: Not set (Optional - {description})")
-            return True
+        # else:
+        #     print(f"  {var_name}: Not set (Optional - {description})")
+        #     return True
 
 def check_package(package_name: str) -> bool:
     """Check if a Python package is installed"""
     try:
         __import__(package_name)
-        print(f"✅ {package_name}: Installed")
+        print(f" {package_name}: Installed")
         return True
     except ImportError:
-        print(f"❌ {package_name}: Not installed (run: pip install {package_name})")
+        print(f" {package_name}: Not installed (run: pip install {package_name})")
         return False
 
 def main():
@@ -60,20 +60,20 @@ def main():
     packages_ok &= check_package("langchain")
     try:
         import dotenv
-        print("✅ python-dotenv: Installed")
+        print(" python-dotenv: Installed")
         packages_ok = packages_ok and True
     except ImportError:
-        print("❌ python-dotenv: Not installed (run: pip install python-dotenv)")
+        print(" python-dotenv: Not installed (run: pip install python-dotenv)")
         packages_ok = False
     
     print()
     print("=" * 60)
     
     if required_vars_ok and packages_ok:
-        print("✅ Setup looks good! You can run: python main.py")
+        print(" Setup looks good! You can run: python main.py")
         return 0
     else:
-        print("❌ Setup incomplete. Please fix the issues above.")
+        print(" Setup incomplete. Please fix the issues above.")
         if not required_vars_ok:
             print("\nMissing required environment variables. Please update your .env file.")
         if not packages_ok:
